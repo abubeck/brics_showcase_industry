@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ros:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ros="http://ros/1.0" name="gazebo">
+  <node name="gazebo" args="$(find cob_gazebo_worlds)/worlds/empty.world">
+    <publisher name="joint_states"/>
+    <actionserver name="/arm_controller/follow_joint_trajectory" ActionType="control_msgs::FollowJointTrajectoryAction"/>
+  </node>
+  <node name="gui"/>
+  <node name="spawn_model" args="-urdf -param robot_description -model silia -z 0.1" paramSource=""/>
+</ros:Package>

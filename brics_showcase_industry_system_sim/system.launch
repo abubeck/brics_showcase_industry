@@ -1,0 +1,59 @@
+<launch>
+<!-- protected region additional custom Launchfile statements in the beginning on begin -->
+	<rosparam command="load" ns="/script_server/arm" file="$(find cob_silia)/config/arm_joint_configurations.yaml" />
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find cob_silia)/urdf/silia.urdf.xacro'" />
+	<rosparam command="load" file="$(find kuka_controller_configuration_gazebo)/ros/controller/arm_controller_kr16.yaml" />
+
+
+    <node pkg="planning_environment" type="environment_server" output="screen" name="environment_server">      
+    	<param name="use_monitor" type="bool" value="true"/>
+    	<param name="use_collision_map" type="bool" value="false"/>
+  	</node>
+
+  	<node pkg="planning_environment" type="planning_scene_validity_server" output="screen" name="planning_scene_validity_server"/>      
+    <!-- Load planning config from silia_arm_navigation package -->
+    <rosparam command="load" ns="robot_description_planning" file="$(find silia_arm_navigation)/config/silia_planning_description.yaml" />
+
+    <!-- Load arm_kinematics_constraint_aware node configured for your robot, using specific kinematics plugin -->
+    <node pkg="arm_kinematics_constraint_aware" type="arm_kinematics_constraint_aware" name="silia_manipulator_kinematics" output="screen">
+        <param name="group" type="string" value="manipulator"/>
+        <param name="manipulator/root_name" type="string" value="base_link"/>
+        <param name="manipulator/tip_name" type="string" value="arm_6_link"/>
+
+        <!-- KDL is the default plugin, however you can build an IKFast plugin -->
+        <!-- <param name="kinematics_solver" type="string" value="arm_kinematics_constraint_aware/KDLArmKinematicsPlugin" /-->>
+        <param name="kinematics_solver" type="string" value="silia_manipulator_kinematics/IKFastKinematicsPlugin" />
+
+   </node>
+
+		
+<!-- protected region additional custom Launchfile statements in the beginning end -->
+  
+
+	<node pkg="gazebo" type="gazebo" name="gazebo"  args="$(find cob_gazebo_worlds)/worlds/empty.world"  output="screen">
+	</node>
+	
+	<node pkg="gazebo" type="gui" name="gui"  output="screen">
+	</node>
+	
+	<node pkg="gazebo" type="spawn_model" name="spawn_model"  args="-urdf -param robot_description -model silia -z 0.1"  output="screen">
+	</node>
+	
+	<!--node pkg="joint_trajectory_action" type="joint_trajectory_action" name="joint_trajectory_action"  ns="arm_controller" output="screen">
+	</node-->
+	
+	<node pkg="pr2_controller_manager" type="spawner" name="spawner"  args="arm_controller"  output="screen">
+	</node>
+	
+	<node pkg="robot_state_publisher" type="state_publisher" name="state_publisher"  output="screen">
+		<param name="publish_frequency" value="50.0"/>
+		<param name="tf_prefix" value=""/>
+	</node>
+	
+
+<!-- protected region additional custom Launchfile statements in the end of launch file on begin -->
+<!-- protected region additional custom Launchfile statements in the end of launch file end -->
+
+</launch>
+
+

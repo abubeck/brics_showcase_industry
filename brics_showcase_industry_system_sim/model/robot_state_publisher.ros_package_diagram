@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:ros="http://ros/1.0" xmi:id="_i0vK0IDxEeKixJ7T97RPMg" type="RosPackage" name="robot_state_publisher.ros_package_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_kA_ikIDxEeKixJ7T97RPMg" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_kBAJoIDxEeKixJ7T97RPMg" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_kBAJoYDxEeKixJ7T97RPMg" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_lVrdkIDxEeKixJ7T97RPMg" type="3001">
+        <element xmi:type="ros:Parameter" href="robot_state_publisher.ros_package#//@node.0/@parameter.0"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_lVrdkYDxEeKixJ7T97RPMg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_pUomcIDxEeKixJ7T97RPMg" type="3001">
+        <element xmi:type="ros:Parameter" href="robot_state_publisher.ros_package#//@node.0/@parameter.1"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_pUomcYDxEeKixJ7T97RPMg"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_kBAJooDxEeKixJ7T97RPMg" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kBAJo4DxEeKixJ7T97RPMg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kBAJpIDxEeKixJ7T97RPMg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_AIrMsID3EeKixJ7T97RPMg" type="3007">
+      <children xmi:type="notation:DecorationNode" xmi:id="_AIrzwID3EeKixJ7T97RPMg" type="5007"/>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_AIrMsYD3EeKixJ7T97RPMg"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_AIrMsoD3EeKixJ7T97RPMg" fontName="Lucida Grande"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_AIrMs4D3EeKixJ7T97RPMg"/>
+      <element xmi:type="ros:Subscriber" href="robot_state_publisher.ros_package#//@node.0/@subscriber.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AIrMtID3EeKixJ7T97RPMg"/>
+    </children>
+    <element xmi:type="ros:Node" href="robot_state_publisher.ros_package#//@node.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kA_ikYDxEeKixJ7T97RPMg" x="296" y="141"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_i0vK0YDxEeKixJ7T97RPMg"/>
+  <element xmi:type="ros:Package" href="robot_state_publisher.ros_package#/"/>
+</notation:Diagram>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:ros="http://ros/1.0" xmi:id="_Raf6oIWpEeK90qRx3Vrq_w" type="RosSystem" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_RdOegIWpEeK90qRx3Vrq_w" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_RdPFkIWpEeK90qRx3Vrq_w" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_RdPFkYWpEeK90qRx3Vrq_w" type="7001">
+      <children xmi:type="notation:Shape" xmi:id="_Rdcg8IWpEeK90qRx3Vrq_w" type="3001" fontName="Lucida Grande">
+        <children xmi:type="notation:DecorationNode" xmi:id="_Rdcg8oWpEeK90qRx3Vrq_w" type="5007"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_Rdcg84WpEeK90qRx3Vrq_w" type="7002">
+          <styles xmi:type="notation:TitleStyle" xmi:id="_Rdcg9IWpEeK90qRx3Vrq_w" showTitle="true"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_Rdcg9YWpEeK90qRx3Vrq_w"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_Rdcg9oWpEeK90qRx3Vrq_w"/>
+        </children>
+        <element xmi:type="ros:Node" href="gazebo.ros_package#//@node.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rdcg8YWpEeK90qRx3Vrq_w"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_RddIAIWpEeK90qRx3Vrq_w" type="3001" fontName="Lucida Grande">
+        <children xmi:type="notation:DecorationNode" xmi:id="_RddIAoWpEeK90qRx3Vrq_w" type="5007"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_RddIA4WpEeK90qRx3Vrq_w" type="7002">
+          <styles xmi:type="notation:TitleStyle" xmi:id="_RddIBIWpEeK90qRx3Vrq_w" showTitle="true"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_RddIBYWpEeK90qRx3Vrq_w"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_RddIBoWpEeK90qRx3Vrq_w"/>
+        </children>
+        <element xmi:type="ros:Node" href="gazebo.ros_package#//@node.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RddIAYWpEeK90qRx3Vrq_w" x="326" y="-1"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_RddvEIWpEeK90qRx3Vrq_w" type="3001" fontName="Lucida Grande">
+        <children xmi:type="notation:DecorationNode" xmi:id="_RddvEoWpEeK90qRx3Vrq_w" type="5007"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_RddvE4WpEeK90qRx3Vrq_w" type="7002">
+          <styles xmi:type="notation:TitleStyle" xmi:id="_RddvFIWpEeK90qRx3Vrq_w" showTitle="true"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_RddvFYWpEeK90qRx3Vrq_w"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_RddvFoWpEeK90qRx3Vrq_w"/>
+        </children>
+        <element xmi:type="ros:Node" href="gazebo.ros_package#//@node.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RddvEYWpEeK90qRx3Vrq_w" x="600"/>
+      </children>
+    </children>
+    <element xmi:type="ros:Package" href="gazebo.ros_package#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RdOegYWpEeK90qRx3Vrq_w" height="295"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_RdPFkoWpEeK90qRx3Vrq_w" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_RdPFlIWpEeK90qRx3Vrq_w" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_RdPsoIWpEeK90qRx3Vrq_w" type="7001"/>
+    <element xmi:type="ros:Package" href="pr2_controller_manager.ros_package#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RdPFk4WpEeK90qRx3Vrq_w" x="595" y="301"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_RdPsoYWpEeK90qRx3Vrq_w" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_RdPso4WpEeK90qRx3Vrq_w" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_RdPspIWpEeK90qRx3Vrq_w" type="7001">
+      <children xmi:type="notation:Shape" xmi:id="_ReV40IWpEeK90qRx3Vrq_w" type="3001" fontName="Lucida Grande">
+        <children xmi:type="notation:DecorationNode" xmi:id="_ReV40oWpEeK90qRx3Vrq_w" type="5007"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_ReV404WpEeK90qRx3Vrq_w" type="7002">
+          <styles xmi:type="notation:TitleStyle" xmi:id="_ReV41IWpEeK90qRx3Vrq_w" showTitle="true"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_ReV41YWpEeK90qRx3Vrq_w"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_ReV41oWpEeK90qRx3Vrq_w"/>
+        </children>
+        <element xmi:type="ros:Node" href="robot_state_publisher.ros_package#//@node.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ReV40YWpEeK90qRx3Vrq_w" x="80" y="17"/>
+      </children>
+    </children>
+    <element xmi:type="ros:Package" href="robot_state_publisher.ros_package#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RdPsooWpEeK90qRx3Vrq_w" x="98" y="311" width="393" height="274"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Raf6oYWpEeK90qRx3Vrq_w"/>
+  <element xmi:type="ros:Architecture" href="brics_showcase_industry_system_sim.ros_system#/"/>
+</notation:Diagram>

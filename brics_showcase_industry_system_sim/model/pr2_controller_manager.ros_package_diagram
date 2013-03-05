@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:ros="http://ros/1.0" xmi:id="_KjcKIIDxEeKixJ7T97RPMg" type="RosPackage" name="pr2_controller_manager.ros_package_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_LCoAgIDxEeKixJ7T97RPMg" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_LConkIDxEeKixJ7T97RPMg" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_LConkYDxEeKixJ7T97RPMg" type="7001">
+      <styles xmi:type="notation:TitleStyle" xmi:id="_LConkoDxEeKixJ7T97RPMg" showTitle="true"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_LConk4DxEeKixJ7T97RPMg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_LConlIDxEeKixJ7T97RPMg"/>
+    </children>
+    <element xmi:type="ros:Node" href="pr2_controller_manager.ros_package#//@node.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LCoAgYDxEeKixJ7T97RPMg" x="329" y="141"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_KjcKIYDxEeKixJ7T97RPMg"/>
+  <element xmi:type="ros:Package" href="pr2_controller_manager.ros_package#/"/>
+</notation:Diagram>

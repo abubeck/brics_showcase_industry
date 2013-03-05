@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ros:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ros="http://ros/1.0" name="robot_state_publisher">
+  <node name="state_publisher">
+    <subscriber name="joint_states"/>
+    <parameter name="publish_frequency" value="50.0" type="double"/>
+    <parameter name="tf_prefix" value="" type="string"/>
+  </node>
+  <depend>sensor_msgs</depend>
+</ros:Package>
