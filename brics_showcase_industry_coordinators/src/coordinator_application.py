@@ -23,9 +23,9 @@ class coordinator_application_impl:
 		sis = smach_ros.IntrospectionServer('coordinator_application', sm0, '/application_sm')
 		sis.start()
 		with sm0:
-			smach.StateMachine.add('TRIGGER_PERCEPTION', smach_ros.ServiceState('/find_object', FindObject), transitions={'succeeded':'PICKUP_OBJECT', 'aborted':'aborted'})
+			#smach.StateMachine.add('TRIGGER_PERCEPTION', smach_ros.ServiceState('/find_object', FindObject), transitions={'succeeded':'PICKUP_OBJECT', 'aborted':'aborted'})
 			smach.StateMachine.add('PICKUP_OBJECT', smach_ros.SimpleActionState('pick_up', PickUpAction), {'succeeded':'DROP_OBJECT'})
-			smach.StateMachine.add('DROP_OBJECT', smach_ros.SimpleActionState('drop_down', DropDownAction), {'succeeded':'TRIGGER_PERCEPTION'})
+			smach.StateMachine.add('DROP_OBJECT', smach_ros.SimpleActionState('drop_down', DropDownAction), {'succeeded':'succeeded'})
 		# Execute SMACH plan
 		outcome = sm0.execute()
 		# protected region initCode end #

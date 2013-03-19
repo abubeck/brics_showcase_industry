@@ -12,7 +12,7 @@
 	<node pkg="brics_showcase_industry_coordinators" type="coordinator_drop" name="coordinator_drop" output="screen">
 	</node>
 	
-	<node pkg="brics_showcase_industry_worldmodel" type="si_worldmodel" name="si_worldmodel" output="screen">
+	<!--node pkg="brics_showcase_industry_worldmodel" type="si_worldmodel" name="si_worldmodel" output="screen">
 	</node>
 	
 	<node pkg="brics_showcase_industry_transformer" type="pose_transformer" name="pose_transformer" output="screen">
@@ -22,7 +22,7 @@
 	</node>
 	
 	<node pkg="cob_kuka_xmlkrc" type="cob_kuka_xmlkrc" name="cob_kuka_xmlkrc" output="screen" cwd="node">
-	</node>
+	</node-->
 <!-- protected region additional custom Launchfile statements in the end of launch file on begin -->
 <!-- protected region additional custom Launchfile statements in the end of launch file end -->
 

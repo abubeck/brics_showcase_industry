@@ -118,17 +118,18 @@ public:
 		{
 			PCube_haltModule(m_dev,config.modul_id);
 			PCube_resetModule(m_dev,config.modul_id);
-			if(PCube_moveRamp(m_dev,config.modul_id,min_pos,config.speed,1.0)!=0)
-				return false;
+			PCube_moveRamp(m_dev,config.modul_id,min_pos,config.speed,1.0);
+			std::cout << "MoveGripper opened" << std::endl;
+			sleep(6.0);
 			return true;
 		}
 		if(req.open == 1) //opening gripper
 		{
 			PCube_haltModule(m_dev,config.modul_id);
 			PCube_resetModule(m_dev,config.modul_id);
-
-			if(PCube_moveRamp(m_dev,config.modul_id,max_pos,config.speed,1.0)!=0)
-				return false;
+			PCube_moveRamp(m_dev,config.modul_id,max_pos,config.speed,1.0);
+			std::cout << "MoveGripper closed" << std::endl;
+			sleep(6.0);
 			return true;
 		}
 		/* protected region user implementation of service callback for MoveGripper end */

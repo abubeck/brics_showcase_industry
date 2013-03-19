@@ -7,7 +7,7 @@ import smach
 import smach_ros
 import time
 from brics_showcase_industry_interfaces.msg import PickUpAction, MoveArmCartAction, MoveArmCartGoal
-from brics_showcase_industry_interfaces.srv import GetObjectPose
+from brics_showcase_industry_interfaces.srv import GetObjectPose, MoveGripper, MoveGripperRequest
 from actionlib import *
 from actionlib.msg import *
 from smach_ros import ActionServerWrapper
@@ -23,20 +23,55 @@ class coordinator_pickup_impl:
 		self.ps2 = PoseStamped()
 		self.pshome = PoseStamped()
 		self.ps.header.stamp = rospy.Time.now()
-		self.ps.pose.position.x = 0.0
-		self.ps.pose.position.y = -0.7
-		self.ps.pose.position.z = 0.443
 
-		self.ps2.header.stamp = rospy.Time.now()
-		self.ps2.pose.position.x = 0.0
-		self.ps2.pose.position.y = -0.7
-		self.ps2.pose.position.z = 0.403
+		self.robot = "KR16"
+		#self.robot = "LBR"
 
-		self.pshome.header.stamp = rospy.Time.now()
-		self.pshome.pose.position.x = 0.366
-		self.pshome.pose.position.y = 0.157
-		self.pshome.pose.position.z = 0.443
+		if(self.robot == "KR16"):		
+			#KUKA KR16
+			self.ps.pose.position.x = -0.2
+			self.ps.pose.position.y = -1.1
+			self.ps.pose.position.z = 0.443
 
+			self.ps2.header.stamp = rospy.Time.now()
+			self.ps2.pose.position.x = -0.2
+			self.ps2.pose.position.y = -1.1
+			self.ps2.pose.position.z = 0.1
+
+			self.pshome.header.stamp = rospy.Time.now()
+			self.pshome.pose.position.x = 0.366
+			self.pshome.pose.position.y = 0.157
+			self.pshome.pose.position.z = 0.443
+
+		else:
+			#KUKA LBR
+			self.ps.header.stamp = rospy.Time.now()
+			self.ps.header.frame_id = "base_link"
+			self.ps.pose.position.x = 0.18
+			self.ps.pose.position.y = -0.716
+			self.ps.pose.position.z = 0.30
+
+			self.ps.pose.orientation.x = 0.545
+			self.ps.pose.orientation.y = 0.088
+			self.ps.pose.orientation.z = -0.011
+			self.ps.pose.orientation.w = -0.001
+
+			self.ps2.header.stamp = rospy.Time.now()
+			self.ps2.header.frame_id = "base_link"
+			self.ps2.pose.position.x = 0.18
+			self.ps2.pose.position.y = -0.716
+			self.ps2.pose.position.z = 0.15
+
+			self.ps2.pose.orientation.x = 0.545
+			self.ps2.pose.orientation.y = 0.088
+			self.ps2.pose.orientation.z = -0.011
+			self.ps2.pose.orientation.w = -0.001
+
+		self.open = MoveGripperRequest()
+		self.open.open = 1
+
+		self.close = MoveGripperRequest()
+		self.close.open = 0
 		self.detection_counter = 0
 		# protected region initCode end #
 		pass
@@ -72,9 +107,10 @@ class coordinator_pickup_impl:
 		sis = smach_ros.IntrospectionServer('coordinator_pickup', sm0, '/pickup_sm')
 		sis.start()
 		with sm0:
-			smach.StateMachine.add('GET_POSE_FROM_WORLDMODEL', smach_ros.ServiceState('/getObjectPose', GetObjectPose, response_cb=self.getposecb), transitions={'succeeded':'MOVE_OVER_BOX', 'aborted':'aborted', 'preempted': 'GET_POSE_FROM_WORLDMODEL'})
+			#smach.StateMachine.add('GET_POSE_FROM_WORLDMODEL', smach_ros.ServiceState('/getObjectPose', GetObjectPose, response_cb=self.getposecb), transitions={'succeeded':'MOVE_OVER_BOX', 'aborted':'aborted', 'preempted': 'GET_POSE_FROM_WORLDMODEL'})
 			smach.StateMachine.add('MOVE_OVER_BOX', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps)), {'succeeded':'MOVE_DOWN'})
-			smach.StateMachine.add('MOVE_DOWN', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps2)), {'succeeded':'MOVE_UP'})
+			smach.StateMachine.add('MOVE_DOWN', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps2)), {'succeeded':'CLOSE_GRIPPER'})
+			smach.StateMachine.add('CLOSE_GRIPPER', smach_ros.ServiceState('/MoveGripper', MoveGripper, request=self.close), transitions={'succeeded':'MOVE_UP', 'aborted':'MOVE_UP',})
 			smach.StateMachine.add('MOVE_UP', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps)), {'succeeded':'succeeded'})
 			#smach.StateMachine.add('MOVE_HOME', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.pshome)), {'succeeded':'succeeded'})
 		# Execute SMACH plan
