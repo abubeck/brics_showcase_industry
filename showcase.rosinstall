@@ -1,0 +1,4 @@
+- git: {local-name: brics_showcase_industry, uri: 'https://github.com/abubeck/brics_showcase_industry.git',
+    version: fe973901c48cfad963282a28ccae633157b8b0a1}
+- git: {local-name: cob_industrial, uri: 'https://github.com/abubeck/cob_industrial.git',
+    version: bfbecfd3868ac9142b931e7c8b128a3e4cda83e9}
