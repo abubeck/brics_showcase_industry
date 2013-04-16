@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ros:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ros="http://ros/1.0" name="brics_showcase_industry_transformer" author="Alexander Bubeck" description="Transforms Positions from Camera Coordinates to Arm Coordinates" license="" rosdep="">
-  <node name="pose_transformer">
+  <node name="pose_transformer" paramSource="$(find brics_showcase_industry_transformer)/config/pose_transformer.yaml">
     <subscriber name="CameraDetections" msg="geometry_msgs::PoseArray"/>
     <serviceClient name="SetObjectPose" msg="brics_showcase_industry_interfaces::SetObjectPose"/>
     <parameter name="CameraPose" value="[[0,0,0],[0,0,0,0]]" type="string"/>
     <parameter name="MeterPerPixel" value="0.000671" type="double"/>
-    <actionserver name="FindObject"/>
+    <parameter name="ResolutionX" value="1600.0" type="double"/>
+    <parameter name="ResolutionY" value="1200.0" type="double"/>
+    <parameter name="camera_base_link_offset_X" value="-0.22" type="double"/>
+    <parameter name="camera_base_link_offset_Y" value="-1.06" type="double"/>
+    <serviceServer name="find_object" msg="brics_showcase_industry_interfaces::FindObject"/>
   </node>
   <depend>brics_showcase_industry_interfaces</depend>
   <depend>geometry_msgs</depend>
-  <action name="find_object" actionserver="//@node.0/@actionserver.0">
-    <actionclient href="../../brics_showcase_industry_coordinators/model/showcase_coordinators.ros_coordinator#//@node.0/@actionclient.2"/>
-  </action>
 </ros:Package>

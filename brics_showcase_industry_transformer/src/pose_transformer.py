@@ -14,17 +14,18 @@ from brics_showcase_industry_interfaces.srv import FindObject, FindObjectRespons
 
 
 class pose_transformer_impl:
-	config_CameraPose = "[[0,0,0],[0,0,0,0]]"
-	config_MeterPerPixel = 0.000589
 	in_CameraDetections = PoseArray()
 	
 	def	__init__(self):
 		# protected region initCode on begin #
+		self.config_CameraPose = rospy.get_param('~CameraPose', "[[0,0,0],[0,0,0,0]]")
+		self.config_MeterPerPixel = rospy.get_param('~MeterPerPixel', 0.000671)
+		self.config_ResolutionX = rospy.get_param('~ResolutionX', 1600.0) # pixel
+		self.config_ResolutionY = rospy.get_param('~ResolutionY', 1200.0) # pixel
+		self.camera_base_link_offset_X = rospy.get_param('~camera_base_link_offset_X', -0.22) # meter (x-axis camera_base_link pointing same direction as base_link)
+		self.camera_base_link_offset_Y = rospy.get_param('~camera_base_link_offset_Y', -1.06) # meter (y-axis camera_base_link pointing oposite direction as base_link)
+
 		self.worldmodel_client = rospy.ServiceProxy('setObjectPose', SetObjectPose)
-		self.config_ResolutionX = 1600.0 # pixel
-		self.config_ResolutionY = 1200.0 # pixel
-		self.camera_base_link_offset_X = -0.22 # meter (x-axis camera_base_link pointing same direction as base_link)
-		self.camera_base_link_offset_Y = -1.06 # meter (y-axis camera_base_link pointing oposite direction as base_link)
 		self.out_CameraDetections = PoseArray()
 		self.received_something = False
 		# protected region initCode end #
@@ -38,6 +39,7 @@ class pose_transformer_impl:
 	def	update(self):
 		# protected region updateCode on begin #
 		in_CameraDetections = copy.deepcopy(self.in_CameraDetections)
+		print "Configs:", self.config_ResolutionX, ", ", self.config_ResolutionY
 		
 		# check if detection is available
 		if len(in_CameraDetections.poses) <= 0:
@@ -71,7 +73,6 @@ class pose_transformer_impl:
 		
 	def	callback_find_object(self, req):
 		# protected region user implementation of service callback for find_object on begin #
-
 		res = FindObjectResponse()
 		
 		# check if detection is available
@@ -112,7 +113,7 @@ class pose_transformer_impl:
 class pose_transformer:
 	def __init__(self):
 		self.impl = pose_transformer_impl()
-		self.CameraDetections = rospy.Subscriber("/detected_pattern",PoseArray, self.CameraDetectionsCallback, queue_size=1) 
+		self.CameraDetections = rospy.Subscriber("CameraDetections",PoseArray, self.CameraDetectionsCallback) 
 		find_object_ = rospy.Service('find_object', FindObject, self.impl.callback_find_object)
 
 	def CameraDetectionsCallback(self, a):
