@@ -17,14 +17,13 @@ class pose_transformer_impl:
 	in_CameraDetections = PoseArray()
 	
 	def	__init__(self):
-		# protected region initCode on begin #
 		self.config_CameraPose = rospy.get_param('~CameraPose', "[[0,0,0],[0,0,0,0]]")
 		self.config_MeterPerPixel = rospy.get_param('~MeterPerPixel', 0.000671)
-		self.config_ResolutionX = rospy.get_param('~ResolutionX', 1600.0) # pixel
-		self.config_ResolutionY = rospy.get_param('~ResolutionY', 1200.0) # pixel
-		self.camera_base_link_offset_X = rospy.get_param('~camera_base_link_offset_X', -0.22) # meter (x-axis camera_base_link pointing same direction as base_link)
-		self.camera_base_link_offset_Y = rospy.get_param('~camera_base_link_offset_Y', -1.06) # meter (y-axis camera_base_link pointing oposite direction as base_link)
-
+		self.config_ResolutionX = rospy.get_param('~ResolutionX', 1600.0)
+		self.config_ResolutionY = rospy.get_param('~ResolutionY', 1200.0)
+		self.config_camera_base_link_offset_X = rospy.get_param('~camera_base_link_offset_X', -0.22)
+		self.config_camera_base_link_offset_Y = rospy.get_param('~camera_base_link_offset_Y', -1.06)
+		# protected region initCode on begin #
 		self.worldmodel_client = rospy.ServiceProxy('setObjectPose', SetObjectPose)
 		self.out_CameraDetections = PoseArray()
 		self.received_something = False
@@ -61,8 +60,8 @@ class pose_transformer_impl:
 		out_CameraDetections.header = out1_CameraDetections.header
 		for pose in out1_CameraDetections.poses:
 			new_pose = Pose()
-			new_pose.position.x = self.camera_base_link_offset_X + pose.position.x
-			new_pose.position.y = self.camera_base_link_offset_Y - pose.position.y
+			new_pose.position.x = self.config_camera_base_link_offset_X + pose.position.x
+			new_pose.position.y = self.config_camera_base_link_offset_Y - pose.position.y
 			new_pose.position.z = 0.0
 			new_pose.orientation = pose.orientation # TODO: rotate 180deg around x-axis
 			out_CameraDetections.poses.append(new_pose)
