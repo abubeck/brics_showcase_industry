@@ -1,0 +1,54 @@
+over_object:
+  header:
+    seq: 0
+    stamp:
+      secs: 0
+      nsecs: 0
+    frame_id: 'base_link'
+  pose:
+    position:
+      x: 0.18
+      y: -0.716
+      z: 0.30
+    orientation:
+      x: 0.545
+      y: 0.088
+      z: -0.011
+      w: -0.001
+
+object:
+  header:
+    seq: 0
+    stamp:
+      secs: 0
+      nsecs: 0
+    frame_id: 'base_link'
+  pose:
+    position:
+    position:
+      x: 0.18
+      y: -0.716
+      z: 0.315
+    orientation:
+      x: 0.545
+      y: 0.088
+      z: -0.011
+      w: -0.001
+
+home:
+  header:
+    seq: 0
+    stamp:
+      secs: 0
+      nsecs: 0
+    frame_id: 'base_link'
+  pose:
+    position:
+      x: 0.366
+      y: 0.157
+      z: 0.443
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0

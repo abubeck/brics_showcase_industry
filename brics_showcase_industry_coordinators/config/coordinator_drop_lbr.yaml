@@ -1,0 +1,53 @@
+drop_over:
+  header:
+    seq: 0
+    stamp:
+      secs: 0
+      nsecs: 0
+    frame_id: 'base_link'
+  pose:
+    position:
+      x: -0.22
+      y: -0.4
+      z: 0.30
+    orientation:
+      x: 0.545
+      y: 0.088
+      z: -0.011
+      w: -0.001
+
+drop:
+  header:
+    seq: 0
+    stamp:
+      secs: 0
+      nsecs: 0
+    frame_id: 'base_link'
+  pose:
+    position:
+      x: -0.22
+      y: -0.4
+      z: 0.14
+    orientation:
+      x: 0.545
+      y: 0.088
+      z: -0.011
+      w: -0.001
+
+home:
+  header:
+    seq: 0
+    stamp:
+      secs: 0
+      nsecs: 0
+    frame_id: 'base_link'
+  pose:
+    position:
+      x: -0.22
+      y: -0.4
+      z: 0.30
+    orientation:
+      x: 0.545
+      y: 0.088
+      z: -0.011
+      w: -0.001

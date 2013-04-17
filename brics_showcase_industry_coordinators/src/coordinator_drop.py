@@ -12,6 +12,7 @@ from actionlib import *
 from actionlib.msg import *
 from smach_ros import ActionServerWrapper
 from geometry_msgs.msg import PoseStamped
+import genpy
 # protected region customHeaders end #
 
 
@@ -20,64 +21,14 @@ class coordinator_drop_impl:
 	
 	def	__init__(self):
 		# protected region initCode on begin #
-		self.ps = PoseStamped()
-		self.ps2 = PoseStamped()
-		self.pshome = PoseStamped()
-		self.ps.header.stamp = rospy.Time.now()
+		self.config_drop_over = PoseStamped()
+		genpy.message.fill_message_args(self.config_drop_over, rospy.get_param('~drop_over'))
 
-		self.robot = "KR16"
-		#self.robot = "LBR"
+		self.config_drop = PoseStamped()
+		genpy.message.fill_message_args(self.config_drop, rospy.get_param('~drop'))
 
-		if(self.robot == "KR16"):
-			# KUKA KR16
-			self.ps.pose.position.x = -0.4
-			self.ps.pose.position.y = -0.7
-			self.ps.pose.position.z = 0.443
-
-			self.ps2.header.stamp = rospy.Time.now()
-			self.ps2.pose.position.x = -0.4
-			self.ps2.pose.position.y = -0.7
-			self.ps2.pose.position.z = 0.12
-
-			self.pshome.header.stamp = rospy.Time.now()
-			self.pshome.pose.position.x = 0.366
-			self.pshome.pose.position.y = 0.157
-			self.pshome.pose.position.z = 0.443
-		else:
-			# KUKA LBR
-			self.ps.header.stamp = rospy.Time.now()
-			self.ps.header.frame_id = "base_link"
-			self.ps.pose.position.x = -0.22
-			self.ps.pose.position.y = -0.4
-			self.ps.pose.position.z = 0.3
-
-			self.ps.pose.orientation.x = 0.545
-			self.ps.pose.orientation.y = 0.088
-			self.ps.pose.orientation.z = -0.011
-			self.ps.pose.orientation.w = -0.001
-
-			self.ps2.header.stamp = rospy.Time.now()
-			self.ps2.header.frame_id = "base_link"
-			self.ps2.pose.position.x = -0.22
-			self.ps2.pose.position.y = -0.4
-			self.ps2.pose.position.z = 0.14
-
-			self.ps2.pose.orientation.x = 0.545
-			self.ps2.pose.orientation.y = 0.088
-			self.ps2.pose.orientation.z = -0.011
-			self.ps2.pose.orientation.w = -0.001
-
-
-			self.pshome.header.stamp = rospy.Time.now()
-			self.pshome.header.frame_id = "base_link"	
-			self.pshome.pose.position.x = -0.22
-			self.pshome.pose.position.y = -0.4
-			self.pshome.pose.position.z = 0.3
-
-			self.pshome.pose.orientation.x = 0.545
-			self.pshome.pose.orientation.y = 0.088
-			self.pshome.pose.orientation.z = -0.011
-			self.pshome.pose.orientation.w = -0.001
+		self.config_home = PoseStamped()
+		genpy.message.fill_message_args(self.config_home, rospy.get_param('~home'))
 
 		self.open = MoveGripperRequest()
 		self.open.open = 1
@@ -94,11 +45,11 @@ class coordinator_drop_impl:
 		sis = smach_ros.IntrospectionServer('coordinator_drop', sm0, '/drop_sm')
 		sis.start()
 		with sm0:
-			smach.StateMachine.add('MOVE_OVER_BOX', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps)), {'succeeded':'MOVE_DOWN'})
-			smach.StateMachine.add('MOVE_DOWN', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps2)), {'succeeded':'OPEN_GRIPPER'})
+			smach.StateMachine.add('MOVE_OVER_BOX', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.config_drop_over)), {'succeeded':'MOVE_DOWN'})
+			smach.StateMachine.add('MOVE_DOWN', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.config_drop)), {'succeeded':'OPEN_GRIPPER'})
 			smach.StateMachine.add('OPEN_GRIPPER', smach_ros.ServiceState('/MoveGripper', MoveGripper, request=self.open), transitions={'succeeded':'MOVE_UP', 'aborted':'MOVE_UP',})
-			smach.StateMachine.add('MOVE_UP', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps)), {'succeeded':'MOVE_HOME'})
-			smach.StateMachine.add('MOVE_HOME', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.pshome)), {'succeeded':'succeeded'})
+			smach.StateMachine.add('MOVE_UP', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.config_drop_over)), {'succeeded':'MOVE_HOME'})
+			smach.StateMachine.add('MOVE_HOME', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.config_home)), {'succeeded':'succeeded'})
 
 		# Execute SMACH plan
 		ActionServerWrapper(

@@ -19,53 +19,19 @@ class coordinator_pickup_impl:
 	
 	def	__init__(self):
 		# protected region initCode on begin #
-		self.ps = PoseStamped()
+		self.config_over_object = PoseStamped()
+		genpy.message.fill_message_args(self.config_over_object, rospy.get_param('~over_object'))
+
+		self.config_object = PoseStamped()
+		genpy.message.fill_message_args(self.config_object, rospy.get_param('~object'))
+
+		self.config_home = PoseStamped()
+		genpy.message.fill_message_args(self.config_home, rospy.get_param('~home'))
+
+
 		self.ps2 = PoseStamped()
 		self.pshome = PoseStamped()
 		self.ps.header.stamp = rospy.Time.now()
-
-		self.robot = "KR16"
-		#self.robot = "LBR"
-
-		if(self.robot == "KR16"):		
-			#KUKA KR16
-			self.ps.pose.position.x = -0.2
-			self.ps.pose.position.y = -1.1
-			self.ps.pose.position.z = 0.443
-
-			self.ps2.header.stamp = rospy.Time.now()
-			self.ps2.pose.position.x = -0.2
-			self.ps2.pose.position.y = -1.1
-			self.ps2.pose.position.z = 0.1
-
-			self.pshome.header.stamp = rospy.Time.now()
-			self.pshome.pose.position.x = 0.366
-			self.pshome.pose.position.y = 0.157
-			self.pshome.pose.position.z = 0.443
-
-		else:
-			#KUKA LBR
-			self.ps.header.stamp = rospy.Time.now()
-			self.ps.header.frame_id = "base_link"
-			self.ps.pose.position.x = 0.18
-			self.ps.pose.position.y = -0.716
-			self.ps.pose.position.z = 0.30
-
-			self.ps.pose.orientation.x = 0.545
-			self.ps.pose.orientation.y = 0.088
-			self.ps.pose.orientation.z = -0.011
-			self.ps.pose.orientation.w = -0.001
-
-			self.ps2.header.stamp = rospy.Time.now()
-			self.ps2.header.frame_id = "base_link"
-			self.ps2.pose.position.x = 0.18
-			self.ps2.pose.position.y = -0.716
-			self.ps2.pose.position.z = 0.15
-
-			self.ps2.pose.orientation.x = 0.545
-			self.ps2.pose.orientation.y = 0.088
-			self.ps2.pose.orientation.z = -0.011
-			self.ps2.pose.orientation.w = -0.001
 
 		self.open = MoveGripperRequest()
 		self.open.open = 1
@@ -108,10 +74,10 @@ class coordinator_pickup_impl:
 		sis.start()
 		with sm0:
 			#smach.StateMachine.add('GET_POSE_FROM_WORLDMODEL', smach_ros.ServiceState('/getObjectPose', GetObjectPose, response_cb=self.getposecb), transitions={'succeeded':'MOVE_OVER_BOX', 'aborted':'aborted', 'preempted': 'GET_POSE_FROM_WORLDMODEL'})
-			smach.StateMachine.add('MOVE_OVER_BOX', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps)), {'succeeded':'MOVE_DOWN'})
-			smach.StateMachine.add('MOVE_DOWN', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps2)), {'succeeded':'CLOSE_GRIPPER'})
+			smach.StateMachine.add('MOVE_OVER_BOX', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.config_over_object)), {'succeeded':'MOVE_DOWN'})
+			smach.StateMachine.add('MOVE_DOWN', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.config_object)), {'succeeded':'CLOSE_GRIPPER'})
 			smach.StateMachine.add('CLOSE_GRIPPER', smach_ros.ServiceState('/MoveGripper', MoveGripper, request=self.close), transitions={'succeeded':'MOVE_UP', 'aborted':'MOVE_UP',})
-			smach.StateMachine.add('MOVE_UP', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.ps)), {'succeeded':'succeeded'})
+			smach.StateMachine.add('MOVE_UP', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.config_over_object)), {'succeeded':'succeeded'})
 			#smach.StateMachine.add('MOVE_HOME', smach_ros.SimpleActionState('MoveArmCart', MoveArmCartAction, goal = MoveArmCartGoal(pose_goal=self.pshome)), {'succeeded':'succeeded'})
 		# Execute SMACH plan
 		ActionServerWrapper(
