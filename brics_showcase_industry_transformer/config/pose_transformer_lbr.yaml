@@ -1,0 +1,7 @@
+CameraPose: "[[0,0,0],[0,0,0,0]]"
+MeterPerPixel: 0.9
+ResolutionX: 0.0
+ResolutionY: 0.0
+camera_base_link_offset_X: 0.270
+camera_base_link_offset_Y: -0.454
+camera_base_link_flag_Y: 1

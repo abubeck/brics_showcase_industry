@@ -21,8 +21,9 @@ class pose_transformer_impl:
 		self.config_MeterPerPixel = rospy.get_param('~MeterPerPixel', 0.000671)
 		self.config_ResolutionX = rospy.get_param('~ResolutionX', 1600.0)
 		self.config_ResolutionY = rospy.get_param('~ResolutionY', 1200.0)
-		self.config_camera_base_link_offset_X = rospy.get_param('~camera_base_link_offset_X', -0.22)
-		self.config_camera_base_link_offset_Y = rospy.get_param('~camera_base_link_offset_Y', -1.06)
+		self.config_camera_base_link_offset_X = rospy.get_param('~camera_base_link_offset_X')
+		self.config_camera_base_link_offset_Y = rospy.get_param('~camera_base_link_offset_Y')
+		self.config_camera_base_link_flag_Y = rospy.get_param('~camera_base_link_flag_Y')
 		# protected region initCode on begin #
 		self.worldmodel_client = rospy.ServiceProxy('setObjectPose', SetObjectPose)
 		self.out_CameraDetections = PoseArray()
@@ -38,10 +39,12 @@ class pose_transformer_impl:
 	def	update(self):
 		# protected region updateCode on begin #
 		in_CameraDetections = copy.deepcopy(self.in_CameraDetections)
-		print "Configs:", self.config_ResolutionX, ", ", self.config_ResolutionY
+		#print "Configs:", self.config_ResolutionX, ", ", self.config_ResolutionY
+		#print "Detection:",in_CameraDetections 
 		
 		# check if detection is available
 		if len(in_CameraDetections.poses) <= 0:
+			rospy.logdebug("detection array empty")
 			return
 		
 		# do transformation from pixel coords to camera_base_link coords in meter
@@ -60,8 +63,8 @@ class pose_transformer_impl:
 		out_CameraDetections.header = out1_CameraDetections.header
 		for pose in out1_CameraDetections.poses:
 			new_pose = Pose()
-			new_pose.position.x = self.config_camera_base_link_offset_X + pose.position.x
-			new_pose.position.y = self.config_camera_base_link_offset_Y - pose.position.y
+			new_pose.position.x = self.config_camera_base_link_offset_X + pose.position.y
+			new_pose.position.y = self.config_camera_base_link_offset_Y - pose.position.x * self.config_camera_base_link_flag_Y
 			new_pose.position.z = 0.0
 			new_pose.orientation = pose.orientation # TODO: rotate 180deg around x-axis
 			out_CameraDetections.poses.append(new_pose)
@@ -76,6 +79,7 @@ class pose_transformer_impl:
 		
 		# check if detection is available
 		while(len(self.in_CameraDetections.poses) <= 0):
+			rospy.loginfo("No Detection received yet")
 			time.sleep(0.1)
 
 		# writing pose to world model
@@ -112,7 +116,7 @@ class pose_transformer_impl:
 class pose_transformer:
 	def __init__(self):
 		self.impl = pose_transformer_impl()
-		self.CameraDetections = rospy.Subscriber("CameraDetections",PoseArray, self.CameraDetectionsCallback) 
+		self.CameraDetections = rospy.Subscriber("detected_pattern",PoseArray, self.CameraDetectionsCallback) 
 		find_object_ = rospy.Service('find_object', FindObject, self.impl.callback_find_object)
 
 	def CameraDetectionsCallback(self, a):
@@ -127,8 +131,10 @@ if __name__ == "__main__":
 		rospy.init_node('pose_transformer')
 		n = pose_transformer()
 		n.impl.configure()
+		r = rospy.Rate(10)
 		while not rospy.is_shutdown():
 			n.run()
+			r.sleep()
 			
 	except rospy.ROSInterruptException:
 		print "Exit"

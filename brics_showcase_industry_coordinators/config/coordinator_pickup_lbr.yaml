@@ -7,14 +7,14 @@ over_object:
     frame_id: 'base_link'
   pose:
     position:
-      x: 0.18
-      y: -0.716
+      x: 0.240
+      y: 0.157
       z: 0.30
     orientation:
-      x: 0.545
-      y: 0.088
-      z: -0.011
-      w: -0.001
+      x: 0.986
+      y: 0.165
+      z: -0.020
+      w: 0.001
 
 object:
   header:
@@ -26,9 +26,9 @@ object:
   pose:
     position:
     position:
-      x: 0.18
-      y: -0.716
-      z: 0.315
+      x: 0.240
+      y: 0.157
+      z: 0.17
     orientation:
       x: 0.545
       y: 0.088

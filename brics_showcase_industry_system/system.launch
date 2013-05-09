@@ -1,28 +1,30 @@
 <launch>
 <!-- protected region additional custom Launchfile statements in the beginning on begin -->
 <!-- protected region additional custom Launchfile statements in the beginning end -->
-  
+	<arg name="robot"/> <!-- either kr16 or lbr-->
 
 	<node pkg="brics_showcase_industry_coordinators" type="coordinator_application" name="coordinator_application" output="screen">
 	</node>
 	
 	<node pkg="brics_showcase_industry_coordinators" type="coordinator_pickup" name="coordinator_pickup" output="screen">
+		<rosparam command="load" file="$(find brics_showcase_industry_coordinators)/config/coordinator_pickup_$(arg robot).yaml" />
 	</node>
 	
 	<node pkg="brics_showcase_industry_coordinators" type="coordinator_drop" name="coordinator_drop" output="screen">
+		<rosparam command="load" file="$(find brics_showcase_industry_coordinators)/config/coordinator_drop_$(arg robot).yaml" />
 	</node>
 	
-	<!--node pkg="brics_showcase_industry_worldmodel" type="si_worldmodel" name="si_worldmodel" output="screen">
+	<node pkg="brics_showcase_industry_worldmodel" type="si_worldmodel" name="si_worldmodel" output="screen">
 	</node>
 	
-        <rosparam command="load" ns="pose_transformer" file="$(find brics_showcase_industry_transformer)/config/pose_transformer.yaml" />
 	<node pkg="brics_showcase_industry_transformer" type="pose_transformer" name="pose_transformer" output="screen">
+		<rosparam command="load" file="$(find brics_showcase_industry_transformer)/config/pose_transformer_$(arg robot).yaml" />
 	</node>
 	
 	<node pkg="brics_cognex_insight" type="cognex_insight" name="cognex_insight" output="screen">
 	</node>
 	
-	<node pkg="cob_kuka_xmlkrc" type="cob_kuka_xmlkrc" name="cob_kuka_xmlkrc" output="screen" cwd="node">
+	<!--node pkg="cob_kuka_xmlkrc" type="cob_kuka_xmlkrc" name="cob_kuka_xmlkrc" output="screen" cwd="node">
 	</node-->
 
 <!-- protected region additional custom Launchfile statements in the end of launch file on begin -->

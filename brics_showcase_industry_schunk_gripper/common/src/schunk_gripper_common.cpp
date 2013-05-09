@@ -52,6 +52,7 @@ public:
     {
         /* protected region user configure on begin */
     	std::cout << "Configuring\n";
+      std::cout << "Speed: " << config.speed << "\n";
     	ostringstream initStr;
     	initStr << "PCAN" << ":" << config.dev_string << "," << config.baudrate;
     	std::cout << "initstring = " << initStr.str().c_str() << "\n";

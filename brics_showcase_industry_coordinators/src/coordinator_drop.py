@@ -85,8 +85,10 @@ if __name__ == "__main__":
 		rospy.init_node('coordinator_drop')
 		n = coordinator_drop()
 		n.impl.configure()
+		r = rospy.Rate(10)
 		while not rospy.is_shutdown():
 			n.run()
+			r.sleep()
 			
 	except rospy.ROSInterruptException:
 		print "Exit"

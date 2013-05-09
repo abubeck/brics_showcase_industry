@@ -10,6 +10,7 @@
   <depend package="dynamic_reconfigure"/>
   	<depend package="brics_showcase_industry_interfaces"/>
   /* protected region additional manifest statements on begin */
+  <depend package="kdl"/>
   /* protected region additional manifest statements end */
   
   

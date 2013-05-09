@@ -1,6 +1,0 @@
-CameraPose: "[[0,0,0],[0,0,0,0]]"
-MeterPerPixel: 0.000671
-ResolutionX: 1400.0
-ResolutionY: 1200.0
-camera_base_link_offset_X: -0.22
-camera_base_link_offset_Y: -1.06
