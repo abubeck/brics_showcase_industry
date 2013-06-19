@@ -39,6 +39,14 @@
       <element xmi:type="ros:ServiceServer" href="pose_transformer.ros_package#//@node.0/@serviceServer.0"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KqZ0hHd_EeKkLvWEO8MiCw" x="135" y="-39"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_ftoR8Ni_EeKKEqM5-30y4A" type="3005">
+      <children xmi:type="notation:DecorationNode" xmi:id="_ftpgENi_EeKKEqM5-30y4A" type="5005"/>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_ftoR8di_EeKKEqM5-30y4A"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_ftoR8ti_EeKKEqM5-30y4A" fontName="Ubuntu"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_ftoR89i_EeKKEqM5-30y4A"/>
+      <element xmi:type="ros:ActionServer" href="pose_transformer.ros_package#//@node.0/@actionserver.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ftoR9Ni_EeKKEqM5-30y4A"/>
+    </children>
     <element xmi:type="ros:Node" href="pose_transformer.ros_package#//@node.0"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TyIc4XXxEeKXHN5-WJaUfg" x="330" y="140" width="302" height="218"/>
   </children>

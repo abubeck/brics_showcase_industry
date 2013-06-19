@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ros:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ros="http://ros/1.0" xmlns:smach="http://smach/1.0">
+  <node xsi:type="smach:SMACHStateMachine" name="coordinator_application">
+    <actionclient xsi:type="smach:ActionState" name="PickupActionClient"/>
+    <actionclient xsi:type="smach:ActionState" name="DropActionClient"/>
+    <actionclient xsi:type="smach:ActionState" name="FindObjectsAction"/>
+    <transitions Source="//@node.0/@actionclient.2" Target="//@node.0/@actionclient.0"/>
+    <transitions Source="//@node.0/@actionclient.0" Target="//@node.0/@actionclient.1"/>
+    <transitions Source="//@node.0/@actionclient.1" Target="//@node.0/@finalStates.0"/>
+    <finalStates/>
+  </node>
+  <node xsi:type="smach:SMACHStateMachine" name="coordinator_pickup">
+    <actionclient xsi:type="smach:ActionState" name="CLOSE_GRIPPER"/>
+    <actionclient xsi:type="smach:ActionState" name="MOVE_OVER_BOX"/>
+    <actionclient xsi:type="smach:ActionState" name="MOVE_DOWN"/>
+    <actionclient xsi:type="smach:ActionState" name="MOVE_UP"/>
+    <transitions Source="//@node.1/@actionclient.1" Target="//@node.1/@actionclient.2"/>
+    <transitions Source="//@node.1/@actionclient.2" Target="//@node.1/@actionclient.0"/>
+    <transitions Source="//@node.1/@actionclient.0" Target="//@node.1/@actionclient.3"/>
+    <transitions Source="//@node.1/@actionclient.3" Target="//@node.1/@finalStates.0"/>
+    <finalStates/>
+  </node>
+</ros:Package>

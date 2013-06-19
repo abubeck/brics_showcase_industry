@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ros:Architecture xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ros="http://ros/1.0">
+  <topic name="image">
+    <publisher href="platform:/resource//cognex_insight/model/cognex_insight.ros_package#//@node.0/@publisher.0"/>
+    <subscriber href="platform:/resource//brics_showcase_industry_transformer/model/pose_transformer.ros_package#//@node.0/@subscriber.0"/>
+  </topic>
+  <packages href="platform:/resource//cognex_insight/model/cognex_insight.ros_package#/"/>
+  <packages href="platform:/resource//brics_showcase_industry_worldmodel/model/si_worldmodel.ros_package#/"/>
+  <packages href="platform:/resource//brics_showcase_industry_transformer/model/pose_transformer.ros_package#/"/>
+  <packages href="platform:/resource//brics_showcase_industry_schunk_gripper/model/schunk_gripper.ros_package#/"/>
+  <packages href="platform:/resource//brics_showcase_industry_coordinators/model/showcase_coordinator_ng.ros_coordinator#/"/>
+  <action>
+    <actionserver href="platform:/resource//brics_showcase_industry_transformer/model/pose_transformer.ros_package#//@node.0/@actionserver.0"/>
+    <actionclient href="platform:/resource//brics_showcase_industry_coordinators/model/showcase_coordinator_ng.ros_coordinator#//@node.0/@actionclient.2"/>
+  </action>
+  <action name="MoveGripper">
+    <actionserver href="platform:/resource//brics_showcase_industry_schunk_gripper/model/schunk_gripper.ros_package#//@node.0/@actionserver.0"/>
+    <actionclient href="platform:/resource//brics_showcase_industry_coordinators/model/showcase_coordinator_ng.ros_coordinator#//@node.1/@actionclient.0"/>
+  </action>
+  <service name="setObject">
+    <serviceserver href="platform:/resource//brics_showcase_industry_worldmodel/model/si_worldmodel.ros_package#//@node.0/@serviceServer.0"/>
+    <serviceclient href="platform:/resource//brics_showcase_industry_transformer/model/pose_transformer.ros_package#//@node.0/@serviceClient.0"/>
+  </service>
+</ros:Architecture>

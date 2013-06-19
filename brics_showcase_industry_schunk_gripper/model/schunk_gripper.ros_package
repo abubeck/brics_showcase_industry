@@ -5,9 +5,10 @@
     <parameter name="dev_string" value="/dev/pcan32" type="string"/>
     <parameter name="open_pos" value="1.0" type="double"/>
     <parameter name="close_pos" value="1.0" type="double"/>
-    <parameter name="baudrate" value="1000" type="int"/>
-    <parameter name="modul_id" value="12" type="int"/>
+    <parameter name="baudrate" value="1000"/>
+    <parameter name="modul_id" value="12"/>
     <parameter name="speed" value="0.01" type="double"/>
+    <actionserver name="MoveGripper" ActionType="brics_showcase_industry_schunk_gripper::MoveGripper"/>
   </node>
   <depend>brics_showcase_industry_interfaces</depend>
   <depend>schunk_libm5api</depend>

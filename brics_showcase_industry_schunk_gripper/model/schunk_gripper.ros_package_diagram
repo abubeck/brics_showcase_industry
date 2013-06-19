@@ -39,6 +39,14 @@
       <element xmi:type="ros:ServiceServer" href="schunk_gripper.ros_package#//@node.0/@serviceServer.0"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l9i21IV7EeK90qRx3Vrq_w" x="63" y="-39"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_uUXR0Ni_EeKKEqM5-30y4A" type="3005">
+      <children xmi:type="notation:DecorationNode" xmi:id="_uUYf8Ni_EeKKEqM5-30y4A" type="5005"/>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_uUXR0di_EeKKEqM5-30y4A"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_uUXR0ti_EeKKEqM5-30y4A" fontName="Ubuntu"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_uUX44Ni_EeKKEqM5-30y4A"/>
+      <element xmi:type="ros:ActionServer" href="schunk_gripper.ros_package#//@node.0/@actionserver.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uUX44di_EeKKEqM5-30y4A"/>
+    </children>
     <element xmi:type="ros:Node" href="schunk_gripper.ros_package#//@node.0"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_joRokYV7EeK90qRx3Vrq_w" x="252" y="140" width="246" height="162"/>
   </children>

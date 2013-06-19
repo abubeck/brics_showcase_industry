@@ -3,13 +3,14 @@
   <node name="pose_transformer" paramSource="$(find brics_showcase_industry_transformer)/config/pose_transformer.yaml">
     <subscriber name="CameraDetections" msg="geometry_msgs::PoseArray"/>
     <serviceClient name="SetObjectPose" msg="brics_showcase_industry_interfaces::SetObjectPose"/>
+    <serviceServer name="find_object" msg="brics_showcase_industry_interfaces::FindObject"/>
     <parameter name="CameraPose" value="[[0,0,0],[0,0,0,0]]" type="string"/>
     <parameter name="MeterPerPixel" value="0.000671" type="double"/>
     <parameter name="ResolutionX" value="1600.0" type="double"/>
     <parameter name="ResolutionY" value="1200.0" type="double"/>
     <parameter name="camera_base_link_offset_X" value="-0.22" type="double"/>
     <parameter name="camera_base_link_offset_Y" value="-1.06" type="double"/>
-    <serviceServer name="find_object" msg="brics_showcase_industry_interfaces::FindObject"/>
+    <actionserver name="find_object" ActionType="brics_showcase_industry_transformer::FindObject"/>
   </node>
   <depend>brics_showcase_industry_interfaces</depend>
   <depend>geometry_msgs</depend>
